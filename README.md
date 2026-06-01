@@ -111,3 +111,9 @@ If you finish early or want an extra challenge, try one of these:
 - Stay curious. The unpredictability is intentional and part of the experience.
 
 When you finish, Playlist Chaos will feel more predictable, and you will have taken your first steps into AI-assisted debugging.
+
+---
+
+## Student reflection
+
+The core concept in this activity is understanding how conditional logic priority and data normalization interact in a real application — specifically, how the order of `if` blocks determines which rule wins when multiple conditions are true at once, and how inconsistent string handling quietly corrupts data before it ever reaches the logic layer. Students are most likely to struggle with the `classify_song` function, where the hype energy check fires before the chill keyword check is ever evaluated, because the bug does not produce an error — it just silently produces wrong output that is easy to miss without a targeted test case. AI was genuinely helpful for explaining what each function was supposed to do, locating where a specific symptom originated in the call chain, and confirming whether a proposed fix was logically sound. AI was misleading when it described the `random_choice_or_none` crash as the root cause of wrong lucky picks, when the actual upstream cause was misclassification in `classify_song` — a reminder that AI traces symptoms rather than root causes unless explicitly prompted to look further back. To guide a student without giving the answer, I would ask them to manually trace `classify_song` with a concrete example — "walk me through exactly what happens, line by line, if energy is 9 and genre is 'lofi'" — so they discover the short-circuit themselves rather than being told where the bug is.
