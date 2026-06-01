@@ -23,7 +23,7 @@ def normalize_artist(artist: str) -> str:
     """Normalize an artist name for comparisons."""
     if not artist:
         return ""
-    return artist.strip().lower()
+    return artist.strip()
 
 
 def normalize_genre(genre: str) -> str:
@@ -47,6 +47,7 @@ def normalize_song(raw: Song) -> Song:
     tags = raw.get("tags", [])
     if isinstance(tags, str):
         tags = [tags]
+    tags = [str(t).strip() for t in tags if str(t).strip()]
 
     return {
         "title": title,

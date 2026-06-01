@@ -238,17 +238,18 @@ def add_song_sidebar():
     tags_text = st.sidebar.text_input("Tags (comma separated)")
 
     if st.sidebar.button("Add to playlist"):
-        raw_tags = [t.strip() for t in tags_text.split(",")]
-        tags = [t for t in raw_tags if t]
+        title_clean = title.strip()
+        artist_clean = artist.strip()
+        tags = [t.strip() for t in tags_text.split(",") if t.strip()]
 
-        song: Song = {
-            "title": title,
-            "artist": artist,
-            "genre": genre,
-            "energy": energy,
-            "tags": tags,
-        }
-        if title and artist:
+        if title_clean and artist_clean:
+            song: Song = {
+                "title": title_clean,
+                "artist": artist_clean,
+                "genre": str(genre),
+                "energy": int(energy),
+                "tags": tags,
+            }
             normalized = normalize_song(song)
             all_songs = st.session_state.songs[:]
             all_songs.append(normalized)
